@@ -26,6 +26,11 @@ export class LoginComponent implements OnInit {
     this.authService.login(form.value).subscribe(res => {
     });
   }
+  registro(form:any): void {
+    console.log(form.value)
+    this.authService.register(form.value).subscribe(res => {
+    });
+  }
 
 
 }
