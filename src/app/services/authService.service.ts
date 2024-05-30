@@ -12,6 +12,7 @@ export class AuthService {
   AUTH_SERVER: string = 'http://localhost:3000/rincondelsabor';
   authSubject = new BehaviorSubject(false);
   private token!: string;
+  public usuarioSesion?:UserRegistroI;
   constructor(private httpClient: HttpClient) { }
 
 
@@ -22,19 +23,22 @@ export class AuthService {
           if (res) {
             // guardar token
             this.saveToken(res.dataUser.accessToken, res.dataUser.expiresIn);
+            //cargamos el usuario registrado como usuario de la sesion actual.
+            this.usuarioSesion = res;
           }
         })
       );
   }
 
-  login(user: UserI): Observable<JwtResponse> {
-    return this.httpClient.post<JwtResponse>(`${this.AUTH_SERVER}/login`,
+  login(user: UserRegistroI): Observable<UserRegistroI> {
+    return this.httpClient.post<UserRegistroI>(`${this.AUTH_SERVER}/login`,
       user).pipe(tap(
-        (res: JwtResponse) => {
+        (res: UserRegistroI) => {
           if (res) {
             console.log(res)
             // guardar token
             this.saveToken(res.dataUser.accessToken, res.dataUser.expiresIn);
+            this.usuarioSesion = res;
           }
         })
       );

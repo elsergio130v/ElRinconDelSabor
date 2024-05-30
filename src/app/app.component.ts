@@ -31,5 +31,8 @@ export class AppComponent {
         }, 100);
       }
     });
+    //comprobamos si en nuestro localStorage existe un token, si es asi y el usuario global de la app es null
+    //hacemos una peticion al back con el token, lo verificamos y traemos el objeto user
+    
   }
 }
