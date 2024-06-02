@@ -37,7 +37,8 @@ export class AppComponent {
     }
   };
   nuevoUser:any;
-  currentItem = 'Inicia Sesión';
+  // currentItem = 'Inicia Sesión';
+
 
   ngOnInit() {
 
@@ -56,13 +57,11 @@ export class AppComponent {
       // this.getToken(this.usuarioGlobal);
       this.authservice.prueba(this.usuarioGlobal).subscribe(res => {
         this.usuarioGlobal = res;
-        this.nuevoUser = res;
-        this.currentItem = res.dataUser.nombre;
+        // this.currentItem = res.dataUser.nombre;
         console.log("metodo get "+this.usuarioGlobal.dataUser.nombre);
       });
       console.log("nuevo"+this.usuarioGlobal)
       console.log("nuevo"+this.usuarioGlobal.dataUser.nombre)
-      console.log("nuevo user "+this.nuevoUser)
 
 
     }else{
@@ -76,7 +75,6 @@ export class AppComponent {
   getToken(usuario:UserRegistroI):void{
     this.authservice.prueba(usuario).subscribe(res => {
       this.usuarioGlobal = res;
-      this.nuevoUser = res;
       console.log("metodo get "+this.usuarioGlobal.dataUser.nombre);
     });
   }

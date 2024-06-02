@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { UserRegistroI } from '../interfaces/UserRegistroI';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -14,25 +15,11 @@ export class AuthService {
   authSubject = new BehaviorSubject(false);
 
   private token!: string;
-  public usuarioSesion:UserRegistroI = {
-    dataUser:{
-      nombre: 'Log In',
-        email:"",
-        password:"",
-        apellidos:"",
-        ciudad:"",
-        cp:"",
-        rol:"",
-        accessToken:"",
-        expiresIn:""
-    }
-  };
-  // public _nombreUsuario:WritableSignal<string> = signal(this.usuarioSesion.dataUser.nombre);
-  public _nombreUsuario = signal('log in');
+  public usuarioSesion:UserRegistroI = this.getDefaultUser();
 
 
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
 
 
@@ -43,10 +30,8 @@ export class AuthService {
           if (res) {
             // guardar token
             this.saveToken(res.dataUser.accessToken, res.dataUser.expiresIn);
-            //cargamos el usuario registrado como usuario de la sesion actual.
             this.usuarioSesion = res;
-            this._nombreUsuario.set(this.usuarioSesion.dataUser.nombre);
-            // this._nombreUsuario.update( value => this.usuarioSesion.dataUser.nombre);
+            window.location.href = "";
           }
         })
       );
@@ -61,11 +46,7 @@ export class AuthService {
             // guardar token
             this.saveToken(res.dataUser.accessToken, res.dataUser.expiresIn);
             this.usuarioSesion = res;
-            this._nombreUsuario.set(this.usuarioSesion.dataUser.nombre);
-            // this._nombreUsuario.update( value => this.usuarioSesion.dataUser.nombre);
-            console.log(this._nombreUsuario());
-
-            // location.reload();
+            window.location.href = "";
             
           }
         })
@@ -81,12 +62,7 @@ export class AuthService {
           
           // guardar token
           console.log(res)
-          this.usuarioSesion = res;
-          // this.usuarioSesion.dataUser.accessToken = res;
-          this._nombreUsuario.set(this.usuarioSesion.dataUser.nombre);
-
-          console.log("ser"+this._nombreUsuario());;
-          
+          this.usuarioSesion = res; 
         }else{
           console.log("fallo: "+res)
         }
@@ -97,10 +73,13 @@ export class AuthService {
 
 
   logout(): void {
+    console.log("entramos en logout");
     this.token = '';
     localStorage.removeItem("ACCESS_TOKEN");
     localStorage.removeItem("EXPIRES_IN");
-    this._nombreUsuario.set('Log In');
+    //el usuario pasa a por defecto
+    this.usuarioSesion = this.getDefaultUser();
+    window.location.href = "";
 
   }
 
@@ -117,7 +96,22 @@ export class AuthService {
     return this.token;
   }
 
-  public getusername():any{
-    return this._nombreUsuario();
+
+  private getDefaultUser(){
+    
+    let user = {
+      dataUser:{
+        nombre: 'Log In',
+          email:"",
+          password:"",
+          apellidos:"",
+          ciudad:"",
+          cp:"",
+          rol:"",
+          accessToken:"",
+          expiresIn:""
+      }
+    };
+    return user;
   }
 }
