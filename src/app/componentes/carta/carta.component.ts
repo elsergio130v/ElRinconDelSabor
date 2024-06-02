@@ -20,9 +20,10 @@ export class CartaComponent {
 
   ngOnInit() {
     console.log("inicia");
-
+    
     this.product.getAllPizzas().subscribe({
       next: (data: any) => {
+      console.log(this.listadoPizzas());
       this.listadoPizzas.set(data.data);
       console.log(this.listadoPizzas());
     },

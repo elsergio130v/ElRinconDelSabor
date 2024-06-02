@@ -80,10 +80,12 @@ export class AuthService {
         if (res) {
           
           // guardar token
-          this.usuarioSesion.dataUser.accessToken = res;
+          console.log(res)
+          this.usuarioSesion = res;
+          // this.usuarioSesion.dataUser.accessToken = res;
           this._nombreUsuario.set(this.usuarioSesion.dataUser.nombre);
 
-          console.log(this._nombreUsuario());;
+          console.log("ser"+this._nombreUsuario());;
           
         }else{
           console.log("fallo: "+res)
@@ -93,25 +95,6 @@ export class AuthService {
 }
 
 
-
-  // updateUserFromLocalToken(token:UserRegistroI): Observable<UserRegistroI> {
-  //   console.log("2");
-  //   return this.httpClient.post<UserRegistroI>(`${this.AUTH_SERVER}/getUserToken`,
-  //   token).pipe(tap(
-  //     (res: UserRegistroI) => {
-  //       if (res) {
-  //         console.log("2");
-  //         console.log(res.dataUser.nombre);
-  //         // guardar token
-  //         // usuarioGlobal = res;
-  //         this.usuarioSesion = res;
-
-  //         // this._nombreUsuario.update( value => this.usuarioSesion.dataUser.nombre);
-  //         console.log(" app "+this.usuarioSesion.dataUser.nombre);
-  //       }
-  //     })
-  //   );
-  // }
 
   logout(): void {
     this.token = '';
@@ -127,7 +110,7 @@ export class AuthService {
     this.token = token;
   }
 
-  private getToken(): string {
+  public getToken(): string {
     if (!this.token) {
       this.token = localStorage.getItem("ACCESS_TOKEN")!;
     }

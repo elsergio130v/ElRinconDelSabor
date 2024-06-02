@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, inject, signal } from '@angular/core';
 import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
 import { AuthService } from '../../services/authService.service';
 
@@ -18,16 +18,11 @@ export class HeaderComponent implements OnInit{
 
   public authservice = inject(AuthService);
   username:any = "log in"; 
-
+  @Input({ required: true }) item!: any;
 
   ngOnInit() {
 
   }  
-
-  onDataChange(newData: any): void {
-    // Aquí maneja el cambio de datos
-    console.log('Data changed:', newData);
-  }
   
 
 }
