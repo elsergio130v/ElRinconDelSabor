@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/authService.service';
 import { UserI } from '../../interfaces/userI'; 
+import { UserRegistroI } from '../../interfaces/UserRegistroI';
 
 @Component({
   selector: 'app-login',
@@ -31,6 +32,8 @@ export class LoginComponent implements OnInit {
     this.authService.register(form.value).subscribe(res => {
     });
   }
+
+
 
 
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
 import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
 import { AuthService } from '../../services/authService.service';
 
@@ -9,21 +9,26 @@ import { AuthService } from '../../services/authService.service';
   standalone: true,
   imports: [CommonModule, HeaderComponent,RouterLinkWithHref,RouterLinkActive],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.css',
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
 
-  authservice = inject(AuthService);
-  nombreusuario = signal("og in");
 
-onInit(){
+  public authservice = inject(AuthService);
+  username:any = "log in"; 
 
-  if(this.authservice.usuarioSesion !== null || this.authservice.usuarioSesion.dataUser.nombre.length !== 0){   
-    this.nombreusuario = this.authservice.dataUser.nombre;
+
+  ngOnInit() {
+
+  }  
+
+  onDataChange(newData: any): void {
+    // Aquí maneja el cambio de datos
+    console.log('Data changed:', newData);
   }
-}
-    
+  
 
-};
+}
 

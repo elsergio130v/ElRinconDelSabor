@@ -8,6 +8,8 @@ import { LoginComponent } from './componentes/login/login.component';
 import { ReservasComponent } from './componentes/reservas/reservas.component';
 import { CartaComponent } from './componentes/carta/carta.component';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from './services/authService.service';
+import { HeaderComponent } from './componentes/header/header.component';
 
 
 @NgModule({
@@ -17,9 +19,10 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HeaderComponent
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: []
 })
 export class AppModule { }
