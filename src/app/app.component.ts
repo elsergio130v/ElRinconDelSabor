@@ -30,6 +30,16 @@ export class AppComponent {
 
     //comprobamos si en nuestro localStorage existe un token, si es asi y el usuario global de la app es null
     //hacemos una peticion al back con el token, lo verificamos y traemos el objeto user
+    if(this.authservice.getExpiracion()){
+      let date = new Date().getTime();
+      if(parseInt(this.authservice.getExpiracion()) <= date){
+        //tiempo de expiracion cumplido, sesion cerrada
+        this.authservice.logout();
+
+      }else{
+         //tiempo de expiracion en curso 
+      }
+    }
 
     //antes de esto, comprobar la caducidad del token, ya que si 
     //ha cumplido la expiracion se elimina

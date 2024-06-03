@@ -1,10 +1,11 @@
 import {  Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { tap } from 'rxjs/operators';
+import { tap, timestamp } from 'rxjs/operators';
 import { Observable, BehaviorSubject,  } from 'rxjs';
 import { UserRegistroI } from '../interfaces/UserRegistroI';
 import { Router } from '@angular/router';
+import { Expansion } from '@angular/compiler';
 
 
 @Injectable({
@@ -15,6 +16,7 @@ export class AuthService {
   authSubject = new BehaviorSubject(false);
 
   private token!: string;
+  private expiracion!: string;
   public usuarioSesion:UserRegistroI = this.getDefaultUser();
 
 
@@ -85,7 +87,11 @@ export class AuthService {
 
   private saveToken(token: string, expiresIn: string): void {
     localStorage.setItem("ACCESS_TOKEN", token);
-    localStorage.setItem("EXPIRES_IN", expiresIn);
+
+    let fecha = new Date();
+    let fecha2 = fecha.getTime() + parseInt(expiresIn);
+    localStorage.setItem("EXPIRES_IN", fecha2.toString());
+    this.expiracion = fecha2.toString();
     this.token = token;
   }
 
@@ -95,6 +101,14 @@ export class AuthService {
     }
     return this.token;
   }
+
+  public getExpiracion(): string {
+    if(!this.expiracion){
+      this.expiracion = localStorage.getItem("EXPIRES_IN")!;
+    }
+    return this.expiracion;
+  }
+  
 
 
   private getDefaultUser(){
