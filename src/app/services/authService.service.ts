@@ -2,7 +2,7 @@ import {  Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { tap } from 'rxjs/operators';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject,  } from 'rxjs';
 import { UserRegistroI } from '../interfaces/UserRegistroI';
 import { Router } from '@angular/router';
 
@@ -53,7 +53,7 @@ export class AuthService {
       );
   }
 
-  prueba(usuario:UserRegistroI): Observable<UserRegistroI> {
+  getUsuarioToken(usuario:UserRegistroI): Observable<UserRegistroI> {
     console.log("2");
     return this.httpClient.post<UserRegistroI>(`${this.AUTH_SERVER}/getUserToken`,
     usuario).pipe(tap(

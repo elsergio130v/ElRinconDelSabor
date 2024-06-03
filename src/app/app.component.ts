@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Router, Event, NavigationEnd, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 import { HeaderComponent } from './componentes/header/header.component';
 import { FooterComponent } from './componentes/footer/footer.component';
@@ -23,21 +23,7 @@ export class AppComponent {
   authservice = inject(AuthService);
 
 
-  usuarioGlobal:UserRegistroI = {
-    dataUser:{
-      nombre: 'Log In',
-        email:"",
-        password:"",
-        apellidos:"",
-        ciudad:"",
-        cp:"",
-        rol:"",
-        accessToken:"",
-        expiresIn:""
-    }
-  };
-  nuevoUser:any;
-  // currentItem = 'Inicia Sesión';
+  usuarioGlobal:UserRegistroI = this.getDefaultUser();
 
 
   ngOnInit() {
@@ -45,38 +31,74 @@ export class AppComponent {
     //comprobamos si en nuestro localStorage existe un token, si es asi y el usuario global de la app es null
     //hacemos una peticion al back con el token, lo verificamos y traemos el objeto user
 
+    //antes de esto, comprobar la caducidad del token, ya que si 
+    //ha cumplido la expiracion se elimina
     if(this.authservice.getToken()){
-
-      //si el token no esta vacio entra aqui lo declaramos y hacemos una peticion para rellenar los datos del usuario
-      console.log("entra");
-      console.log("token "+this.authservice.getToken());
       
       let token = this.authservice.getToken(); 
       this.usuarioGlobal.dataUser.accessToken = token!;
-      console.log(this.usuarioGlobal)
-      // this.getToken(this.usuarioGlobal);
-      this.authservice.prueba(this.usuarioGlobal).subscribe(res => {
-        this.usuarioGlobal = res;
-        // this.currentItem = res.dataUser.nombre;
-        console.log("metodo get "+this.usuarioGlobal.dataUser.nombre);
-      });
-      console.log("nuevo"+this.usuarioGlobal)
-      console.log("nuevo"+this.usuarioGlobal.dataUser.nombre)
+      //definimos el token del usuario, nos subscribimos al metodo get token 
+      //que llama al authservice, este llama al back con el token del local
+      //y nos actualiza el user que le pasamos por paramatro que es su response
 
-
-    }else{
-      console.log("no existe token"+this.usuarioGlobal)
+      this.getToken(this.usuarioGlobal);
 
     }
-    
     
   }
 
   getToken(usuario:UserRegistroI):void{
-    this.authservice.prueba(usuario).subscribe(res => {
+    this.authservice.getUsuarioToken(usuario).subscribe(res => {
       this.usuarioGlobal = res;
-      console.log("metodo get "+this.usuarioGlobal.dataUser.nombre);
     });
+  }
+
+  comprobarExpiracion(){
+    
+    // Recuperar el objeto de localStorage
+    var storedObject = JSON.parse(this.getExpirateToken()!);
+
+if (storedObject) {
+    // Obtener la fecha y hora actuales
+    var currentTimestamp = new Date().getTime();
+
+    // Obtener la marca de tiempo almacenada
+    var storedTimestamp = storedObject.timestamp;
+
+    // Comparar las dos marcas de tiempo
+    if (currentTimestamp > storedTimestamp) {
+        console.log("La fecha almacenada es anterior a la fecha actual.");
+    } else if (currentTimestamp < storedTimestamp) {
+        console.log("La fecha almacenada es posterior a la fecha actual.");
+    } else {
+        console.log("La fecha almacenada es igual a la fecha actual.");
+    }
+} else {
+    console.log("No se encontró ningún objeto en localStorage con la clave especificada.");
+}
+
+  }
+
+  private getDefaultUser(){
+    
+    let user = {
+      dataUser:{
+        nombre: 'Log In',
+          email:"",
+          password:"",
+          apellidos:"",
+          ciudad:"",
+          cp:"",
+          rol:"",
+          accessToken:"",
+          expiresIn:""
+      }
+    };
+    return user;
+  }
+
+  private getExpirateToken(){
+    return localStorage.getItem("EXPIRES_IN");
   }
 
 }

@@ -8,39 +8,67 @@
      </div>
  
      <!-- Formulario -->
-     <form action="#" method="POST" class="mt-12">
+     <form action="#" method="POST" class="mt-12 ">
        <!-- Número de comensales -->
        <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-8">
          <div class="sm:col-span-2">
            <label for="comensales" class="block text-sm font-medium text-gray-700">Nº Comensales</label>
            <div class="mt-1">
              <!-- Botones para seleccionar el número de comensales -->
-             <span class="inline-flex rounded-md shadow-sm">
-               <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                 2
-               </button>
-               <!-- ... otros botones ... -->
-               <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                 8
-               </button>
-             </span>
+             <select class="py-3 px-4 pe-9 block w-full disabled:opacity-50 disabled:pointer-events-none rounded-lg
+                border border-transparent bg-green-100 text-green-900 hover:bg-green-200 
+              dark:hover:bg-green-900 dark:text-green-400">
+              <option selected="">Selecciona el Número de Comensales</option>
+              <option value="2">2</option>
+              <option value="4">4</option>
+              <option value="8">8</option>
+            </select>
            </div>
          </div>
        </div>
+
+       <!-- Hora a Preferir por el cliente -->
+       <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-8">
+        <div class="sm:col-span-2">
+          <label for="comensales" class="block text-sm font-medium text-gray-700">
+            Escoge la hora deseada entre las disponibles
+          </label>
+          <div class="mt-1">
+            <!-- Botones para seleccionar el número de comensales -->
+            <select class="py-3 px-4 pe-9 block w-full disabled:opacity-50 disabled:pointer-events-none rounded-lg
+               border border-transparent bg-green-100 text-green-900 hover:bg-green-200 
+             dark:hover:bg-green-900 dark:text-green-400">
+             <option selected="">Selecciona la hora deseada</option>
+             <option value="2">2</option>
+             <option value="4">4</option>
+             <option value="8">8</option>
+           </select>
+          </div>
+        </div>
+      </div>       
  
        <!-- Preferencias de mesa -->
-       <div class="mt-6">
-         <label for="mesa" class="block text-sm font-medium text-gray-700">Preferencia de Mesa</label>
-         <div class="mt-1">
-           <!-- Botones para seleccionar la mesa preferida -->
-           <span class="inline-flex rounded-md shadow-sm">
-             <button type="button" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-               Mesa #3
-             </button>
-             <!-- ... otros botones ... -->
-           </span>
-         </div>
-       </div>
+       
+       <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-8">
+        <div class="sm:col-span-2">
+          <label for="comensales" class="block text-sm font-medium text-gray-700">Nº Comensales</label>
+          <div class="mt-1">
+            <!-- Botones para seleccionar el número de comensales -->
+            <select class="py-3 px-4 pe-9 block w-full disabled:opacity-50 disabled:pointer-events-none rounded-lg
+               border border-transparent bg-green-100 text-green-900 hover:bg-green-200 
+             dark:hover:bg-green-900 dark:text-green-400">
+             <option selected="">Selecciona el Número de Comensales</option>
+             @for (item of listadoReseras(); track $index) {
+              @if (item.comensales === 4) {
+                <option [value]="item.idmesa">{{"Mesa: "+item.idmesa}}</option>
+                
+              }
+             }
+
+           </select>
+          </div>
+        </div>
+      </div>
  
        <!-- ... resto del formulario ... -->
  
