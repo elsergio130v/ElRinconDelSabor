@@ -58,11 +58,11 @@
                border border-transparent bg-green-100 text-green-900 hover:bg-green-200 
              dark:hover:bg-green-900 dark:text-green-400">
              <option selected="">Selecciona el Número de Comensales</option>
-             @for (item of listadoReseras(); track $index) {
-              @if (item.comensales === 4) {
+             @for (item of listadoReservas(); track $index) {
+
                 <option [value]="item.idmesa">{{"Mesa: "+item.idmesa}}</option>
                 
-              }
+              
              }
 
            </select>

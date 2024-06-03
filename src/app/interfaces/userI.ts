@@ -1,7 +1,10 @@
 export interface UserI {
     id:number,
-    name:string,
     email:string,
     password:string
-
+    nombre:string,
+    apellidos:string,
+    ciudad:string,
+    cp:string,
+    rol:string,
 }

@@ -15,6 +15,11 @@ export class ReservasService {
       console.log(this.httpClient.get(url.toString()));
       return this.httpClient.get(url.toString());
   }
+  getReservasFuturas(){
+    let url = new URL('http://localhost:3000/rincondelsabor/reservasFuturas');
+    console.log(this.httpClient.get(url.toString()));
+    return this.httpClient.get(url.toString());
+  }
 
   addReserva(){
     

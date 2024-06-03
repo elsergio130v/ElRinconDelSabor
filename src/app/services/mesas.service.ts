@@ -9,8 +9,8 @@ export class MesasService {
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
-  getReservas(){
-      let url = new URL('http://localhost:3000/rincondelsabor/reservas');
+  getMesas(){
+      let url = new URL('http://localhost:3000/rincondelsabor/mesas');
       console.log(this.httpClient.get(url.toString()));
       return this.httpClient.get(url.toString());
   }

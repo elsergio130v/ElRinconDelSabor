@@ -27,9 +27,7 @@ export class AppComponent {
 
 
   ngOnInit() {
-
-    //comprobamos si en nuestro localStorage existe un token, si es asi y el usuario global de la app es null
-    //hacemos una peticion al back con el token, lo verificamos y traemos el objeto user
+//pedimos si existe en localStorage una expiracion, la comparamos por si sigue en vigencia la sesion o no.
     if(this.authservice.getExpiracion()){
       let date = new Date().getTime();
       if(parseInt(this.authservice.getExpiracion()) <= date){
@@ -41,8 +39,6 @@ export class AppComponent {
       }
     }
 
-    //antes de esto, comprobar la caducidad del token, ya que si 
-    //ha cumplido la expiracion se elimina
     if(this.authservice.getToken()){
       
       let token = this.authservice.getToken(); 

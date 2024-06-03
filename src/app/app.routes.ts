@@ -5,6 +5,7 @@ import { CartaComponent } from './componentes/carta/carta.component';
 import { ReservasComponent } from './componentes/reservas/reservas.component';
 import { LandinPageComponent } from './componentes/landin-page/landin-page.component';
 import { EditProfileComponent } from './componentes/edit-profile/edit-profile.component';
+import { VistaAdminComponent } from './componentes/vista-admin/vista-admin.component';
 
 
 export const routes: Routes = [
@@ -16,6 +17,7 @@ export const routes: Routes = [
     { path: "carta", component: CartaComponent  },
     { path: "editprofile", component: EditProfileComponent },
     { path: 'inicioSesion', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
+    { path: "vistaAdmin", component: VistaAdminComponent },
 
 
 ];
