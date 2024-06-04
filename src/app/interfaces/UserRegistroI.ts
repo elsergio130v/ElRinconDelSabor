@@ -7,6 +7,7 @@ export interface UserRegistroI {
     ciudad:string,
     cp:string,
     rol:string,
+    telefono:string,
     accessToken:string,
     expiresIn:string
     }

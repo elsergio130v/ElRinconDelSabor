@@ -36,20 +36,22 @@ export class AppComponent {
 
       }else{
          //tiempo de expiracion en curso 
+
+         if(this.authservice.getToken()){
+      
+          let token = this.authservice.getToken(); 
+          this.usuarioGlobal.dataUser.accessToken = token!;
+          //definimos el token del usuario, nos subscribimos al metodo get token 
+          //que llama al authservice, este llama al back con el token del local
+          //y nos actualiza el user que le pasamos por paramatro que es su response
+    
+          this.getToken(this.usuarioGlobal);
+    
+        }
       }
     }
 
-    if(this.authservice.getToken()){
-      
-      let token = this.authservice.getToken(); 
-      this.usuarioGlobal.dataUser.accessToken = token!;
-      //definimos el token del usuario, nos subscribimos al metodo get token 
-      //que llama al authservice, este llama al back con el token del local
-      //y nos actualiza el user que le pasamos por paramatro que es su response
 
-      this.getToken(this.usuarioGlobal);
-
-    }
     
   }
 
@@ -96,6 +98,7 @@ if (storedObject) {
           ciudad:"",
           cp:"",
           rol:"",
+          telefono:"",
           accessToken:"",
           expiresIn:""
       }

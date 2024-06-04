@@ -55,15 +55,29 @@ export class AuthService {
       );
   }
 
+  editarUserSinContrasena(user: UserRegistroI): Observable<UserRegistroI> {
+    return this.httpClient.post<UserRegistroI>(`${this.AUTH_SERVER}/editarUserSinContrasena`,
+    user).pipe(tap(
+      (res: UserRegistroI) => {
+        if (res) {
+          
+          // guardar token
+          this.saveToken(res.dataUser.accessToken, res.dataUser.expiresIn);
+          this.usuarioSesion = res;
+          window.location.href = "";
+          
+        }
+      })
+    );
+}
+
   getUsuarioToken(usuario:UserRegistroI): Observable<UserRegistroI> {
-    console.log("2");
     return this.httpClient.post<UserRegistroI>(`${this.AUTH_SERVER}/getUserToken`,
     usuario).pipe(tap(
       (res: any) => {
         if (res) {
           
           // guardar token
-          console.log(res)
           this.usuarioSesion = res; 
         }else{
           console.log("fallo: "+res)
@@ -110,6 +124,10 @@ export class AuthService {
   }
   
 
+  public getusuarrioSesion(){
+    console.log(this.usuarioSesion)
+    return this.usuarioSesion;
+  }
 
   private getDefaultUser(){
     
@@ -122,6 +140,7 @@ export class AuthService {
           ciudad:"",
           cp:"",
           rol:"",
+          telefono:"",
           accessToken:"",
           expiresIn:""
       }

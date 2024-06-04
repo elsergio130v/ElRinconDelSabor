@@ -11,7 +11,7 @@ import { VistaAdminComponent } from './componentes/vista-admin/vista-admin.compo
 export const routes: Routes = [
 
     { path: "", component: LandinPageComponent },
-    { path: "inicio", component: LandinPageComponent },
+    // { path: "inicio", component: LandinPageComponent },
     // { path: "inicioSesion", component: LoginComponent },
     { path: "reservas", component: ReservasComponent  },
     { path: "carta", component: CartaComponent  },
