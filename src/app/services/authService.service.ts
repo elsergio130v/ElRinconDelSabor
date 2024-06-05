@@ -6,6 +6,7 @@ import { Observable, BehaviorSubject,  } from 'rxjs';
 import { UserRegistroI } from '../interfaces/UserRegistroI';
 import { Router } from '@angular/router';
 import { Expansion } from '@angular/compiler';
+import { UserI } from '../interfaces/userI';
 
 
 @Injectable({
@@ -71,6 +72,25 @@ export class AuthService {
     );
 }
 
+editarUserConContrasena(user: UserI): Observable<UserRegistroI> {
+  return this.httpClient.post<UserRegistroI>(`${this.AUTH_SERVER}/editarUserConContrasena`,
+  user).pipe(tap(
+    (res: UserRegistroI) => {
+      if (res) {
+        
+        // guardar token
+        this.saveToken(res.dataUser.accessToken, res.dataUser.expiresIn);
+        this.usuarioSesion = res;
+        window.location.href = "";
+        
+      }
+    })
+  );
+}
+
+
+
+
   getUsuarioToken(usuario:UserRegistroI): Observable<UserRegistroI> {
     return this.httpClient.post<UserRegistroI>(`${this.AUTH_SERVER}/getUserToken`,
     usuario).pipe(tap(
@@ -79,6 +99,7 @@ export class AuthService {
           
           // guardar token
           this.usuarioSesion = res; 
+          console.log("tel service- "+ res.dataUser.telefono)
         }else{
           console.log("fallo: "+res)
         }
@@ -131,7 +152,7 @@ export class AuthService {
 
   private getDefaultUser(){
     
-    let user = {
+    let user:UserRegistroI = {
       dataUser:{
         nombre: 'Log In',
           email:"",

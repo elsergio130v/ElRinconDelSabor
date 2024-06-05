@@ -1,7 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CartaComponent } from './componentes/carta/carta.component';
-// import { LoginComponent } from './componentes/login/login.component';
 import { ReservasComponent } from './componentes/reservas/reservas.component';
 import { LandinPageComponent } from './componentes/landin-page/landin-page.component';
 import { EditProfileComponent } from './componentes/edit-profile/edit-profile.component';

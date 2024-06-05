@@ -27,6 +27,7 @@ export class AppComponent {
 
 
   ngOnInit() {
+
 //pedimos si existe en localStorage una expiracion, la comparamos por si sigue en vigencia la sesion o no.
     if(this.authservice.getExpiracion()){
       let date = new Date().getTime();
@@ -51,13 +52,14 @@ export class AppComponent {
       }
     }
 
-
+    console.log(this.usuarioGlobal)
     
   }
 
   getToken(usuario:UserRegistroI):void{
     this.authservice.getUsuarioToken(usuario).subscribe(res => {
       this.usuarioGlobal = res;
+      console.log(this.usuarioGlobal)
     });
   }
 

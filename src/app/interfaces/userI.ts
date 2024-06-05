@@ -1,5 +1,4 @@
 export interface UserI {
-    id:number,
     email:string,
     password:string
     nombre:string,
@@ -7,4 +6,7 @@ export interface UserI {
     ciudad:string,
     cp:string,
     rol:string,
+    telefono:string,
+    accessToken:string,
+    expiresIn:string
 }
