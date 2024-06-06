@@ -2,7 +2,7 @@ import { Component, Input, inject } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { UserRegistroI } from '../../interfaces/UserRegistroI';
 import { AuthService } from '../../services/authService.service';
-import { FormControl, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { UserI } from '../../interfaces/userI';
 
 @Component({

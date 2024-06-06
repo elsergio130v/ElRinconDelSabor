@@ -8,16 +8,17 @@
      </div>
  
      <!-- Formulario -->
-     <form action="#" method="POST" class="mt-12 ">
+     <form [formGroup]="reservar" (ngSubmit)="onSubmit()" class="mt-12">
        <!-- Número de comensales -->
-       <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-8">
+       <div class="grid grid-cols-1 gap-y-6 ">
          <div class="sm:col-span-2">
            <label for="comensales" class="block text-sm font-medium text-gray-700">Nº Comensales</label>
            <div class="mt-1">
              <!-- Botones para seleccionar el número de comensales -->
 
             <select class="py-3 px-4 pe-9 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 
-            disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:focus:ring-neutral-600" (change)="seleccionarMesa($event)">
+            disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:focus:ring-neutral-600 " (change)="seleccionarMesa($event)"
+            formControlName="comensales">
               <option selected="">Selecciona el Número de Comensales</option>
               <option value="2">2</option>
               <option value="4">4</option>
@@ -28,18 +29,20 @@
        </div>
 
        <!-- Hora a Preferir por el cliente -->
-       <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-8">
+       <div class="grid grid-cols-1 gap-y-6 ">
         <div class="sm:col-span-2">
           <label for="comensales" class="block text-sm font-medium text-gray-700">
-            Escoge la hora deseada entre las disponibles
+            Escoge el dia deseado para la reserva
           </label>
           <div class="mt-1">
             <!-- Botones para seleccionar el número de comensales -->
             @if (dateHabilitado) {
               <input type="date" class="py-3 px-4 pe-9 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 
-              disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:focus:ring-neutral-600" id="date-input" [min]="minDate" (change)="seleccionarDate($event)">
+              disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:focus:ring-neutral-600" id="date-input" [min]="minDate" (change)="seleccionarDate($event)"
+              formControlName="fecha">
             }@else {
-              <input type="date" class="datetime-local-input " disabled id="date-input" [min]="minDate" >
+              <input type="date" class="py-3 px-4 pe-9 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 
+              disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:focus:ring-neutral-600" disabled id="date-input" [min]="minDate" >
             }
           </div>
         </div>
@@ -47,14 +50,14 @@
  
        <!-- Preferencias de mesa -->
        
-       <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-8">
+       <div class="grid grid-cols-1 gap-y-6 ">
         <div class="sm:col-span-2">
           <label for="comensales" class="block text-sm font-medium text-gray-700">Selecciona una hora entre las disponibles</label>
           <div class="mt-1">
             <!-- Botones para seleccionar el número de comensales -->
             @if (habilitarHorario) {
               <select class="py-3 px-4 pe-9 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 
-              disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:focus:ring-neutral-600">
+              disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:focus:ring-neutral-600" formControlName="horas" (change)="getIdMesa($event) ">
                <option selected="">Selecciona el Número de Comensales</option>
                @for (item of horasFiltradas; track $index) {
 
@@ -74,11 +77,25 @@
       </div>
  
        <!-- ... resto del formulario ... -->
- 
+       <div class="grid grid-cols-1 gap-y-6 ">
+        <div class="sm:col-span-2">
+          <label for="comensales" class="block text-sm font-medium text-gray-700">
+            Correo electrónico de la persona interesada
+          </label>
+          <div class="mt-1">
+            <!-- Botones para seleccionar el número de comensales -->
+            <input type="email" class="py-3 px-4 pe-9 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 
+              disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:focus:ring-neutral-600" name="emailReserva" formControlName="email">
+            
+          </div>
+        </div>
+      </div> 
        <!-- Botón de envío -->
        <div class="mt-6">
          <span class="block w-full rounded-md shadow-sm">
-           <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent text-base font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+           <button type="submit" class="flex w-full justify-center rounded-md bg-green-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white 
+           shadow-sm hover:bg-green-600 hover:scale-105 transition-all duration-200 active:scale-95 focus-visible:outline focus-visible:outline-2 
+           focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
              Reservar
            </button>
          </span>

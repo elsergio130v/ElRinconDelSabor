@@ -35,4 +35,32 @@ export class ReservasService {
     );
   }
 
+  getIdMesaLibrePorHora(fecha:{fecha:string}, comensales:{comensales:number}): Observable<number>{
+    return this.httpClient.post<number>('http://localhost:3000/rincondelsabor/getIdMesaLibrePorHora', {fecha, comensales})
+    .pipe(tap(
+      (res:number) =>{
+        if(res){
+          console.log("correcto")
+        }else{
+          console.log("failed")
+          
+        }
+      })
+    );
+  }
+
+  setReserva(fecha:{fecha:string}, idMesa:{idMesa:number}, email:{email:string}): Observable<number[]>{
+    return this.httpClient.post<any>('http://localhost:3000/rincondelsabor/setReserva', {fecha, idMesa,email})
+    .pipe(tap(
+      (res:any) =>{
+        if(res){
+          console.log("correcto")
+        }else{
+          console.log("failed")
+          
+        }
+      })
+    );
+  }
+
 }

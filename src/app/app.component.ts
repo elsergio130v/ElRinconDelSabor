@@ -58,35 +58,33 @@ export class AppComponent {
   getToken(usuario:UserRegistroI):void{
     this.authservice.getUsuarioToken(usuario).subscribe(res => {
       this.usuarioGlobal = res;
-      console.log(this.usuarioGlobal)
     });
   }
 
-  comprobarExpiracion(){
+//   comprobarExpiracion(){
     
-    // Recuperar el objeto de localStorage
-    var storedObject = JSON.parse(this.getExpirateToken()!);
+//     // Recuperar el objeto de localStorage
+//     var storedObject = JSON.parse(this.getExpirateToken()!);
 
-if (storedObject) {
-    // Obtener la fecha y hora actuales
-    var currentTimestamp = new Date().getTime();
+// if (storedObject) {
+//     // Obtener la fecha y hora actuales y compararla con la almacenada, si la almacenada es 
+//     var currentTimestamp = new Date().getTime();
 
-    // Obtener la marca de tiempo almacenada
-    var storedTimestamp = storedObject.timestamp;
 
-    // Comparar las dos marcas de tiempo
-    if (currentTimestamp > storedTimestamp) {
-        console.log("La fecha almacenada es anterior a la fecha actual.");
-    } else if (currentTimestamp < storedTimestamp) {
-        console.log("La fecha almacenada es posterior a la fecha actual.");
-    } else {
-        console.log("La fecha almacenada es igual a la fecha actual.");
-    }
-} else {
-    console.log("No se encontró ningún objeto en localStorage con la clave especificada.");
-}
+//     var storedTimestamp = storedObject.timestamp;
 
-  }
+//     if (currentTimestamp > storedTimestamp) {
+//         console.log("La fecha almacenada es anterior a la fecha actual.");
+//     } else if (currentTimestamp < storedTimestamp) {
+//         console.log("La fecha almacenada es posterior a la fecha actual.");
+//     } else {
+//         console.log("La fecha almacenada es igual a la fecha actual.");
+//     }
+// } else {
+//     console.log("No se encontró ningún objeto en localStorage con la clave especificada.");
+// }
+
+//   }
 
   private getDefaultUser(){
     
@@ -107,8 +105,8 @@ if (storedObject) {
     return user;
   }
 
-  private getExpirateToken(){
-    return localStorage.getItem("EXPIRES_IN");
-  }
+  // private getExpirateToken(){
+  //   return localStorage.getItem("EXPIRES_IN");
+  // }
 
 }
