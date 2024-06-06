@@ -59,29 +59,38 @@ export class AuthService {
   editarUserSinContrasena(user: UserRegistroI): Observable<UserRegistroI> {
     return this.httpClient.post<UserRegistroI>(`${this.AUTH_SERVER}/editarUserSinContrasena`,
     user).pipe(tap(
-      (res: UserRegistroI) => {
+      (res: any) => {
         if (res) {
           
-          // guardar token
-          this.saveToken(res.dataUser.accessToken, res.dataUser.expiresIn);
-          this.usuarioSesion = res;
-          window.location.href = "";
+          //actualizamos los datos del usuario en sesion con  la respuesta, que son los datos
+          //actualizados.
+          console.log(res)
+          this.usuarioSesion.dataUser.nombre = res.user.nombre;
+          this.usuarioSesion.dataUser.apellidos = res.user.apellidos;
+          this.usuarioSesion.dataUser.telefono = res.user.telefono;
+
+
+
+          // window.location.href = "";
           
         }
       })
     );
 }
 
-editarUserConContrasena(user: UserI): Observable<UserRegistroI> {
+editarUserConContrasena(user: UserRegistroI): Observable<UserRegistroI> {
   return this.httpClient.post<UserRegistroI>(`${this.AUTH_SERVER}/editarUserConContrasena`,
   user).pipe(tap(
-    (res: UserRegistroI) => {
+    (res: any) => {
       if (res) {
         
+        
         // guardar token
-        this.saveToken(res.dataUser.accessToken, res.dataUser.expiresIn);
-        this.usuarioSesion = res;
-        window.location.href = "";
+        this.usuarioSesion.dataUser.nombre = res.user.nombre;
+        this.usuarioSesion.dataUser.apellidos = res.user.apellidos;
+        this.usuarioSesion.dataUser.telefono = res.user.telefono;
+        // this.usuarioSesion = res;
+        // window.location.href = "";
         
       }
     })
@@ -94,7 +103,7 @@ editarUserConContrasena(user: UserI): Observable<UserRegistroI> {
   getUsuarioToken(usuario:UserRegistroI): Observable<UserRegistroI> {
     return this.httpClient.post<UserRegistroI>(`${this.AUTH_SERVER}/getUserToken`,
     usuario).pipe(tap(
-      (res: any) => {
+      (res: UserRegistroI) => {
         if (res) {
           
           // guardar token

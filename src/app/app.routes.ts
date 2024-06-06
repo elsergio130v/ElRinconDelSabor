@@ -14,7 +14,7 @@ export const routes: Routes = [
     // { path: "inicioSesion", component: LoginComponent },
     { path: "reservas", component: ReservasComponent  },
     { path: "carta", component: CartaComponent  },
-    { path: "editprofile", component: EditProfileComponent },
+    { path: "editprofile", component: EditProfileComponent, },
     { path: 'inicioSesion', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
     { path: "vistaAdmin", component: VistaAdminComponent },
 

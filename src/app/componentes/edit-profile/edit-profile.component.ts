@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { UserRegistroI } from '../../interfaces/UserRegistroI';
 import { AuthService } from '../../services/authService.service';
@@ -18,17 +18,15 @@ export class EditProfileComponent {
   authService = inject(AuthService)
   Usuario!:UserRegistroI;
   nuevoUsuario!:UserRegistroI;
-  nuevoUserConContrasena:UserI = this.getDefaultUserConContrasena();
   editPerfil = this.formBuilder.group({
-    nombre : [''],
-    apellidos : [''],
-    email: [''],
+    nombre : [""],
+    apellidos : [""],
+    email: [""],
     password : ['',
       Validators.pattern("^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$"),
     ] ,
     passwordconfirm: [''],
-    telefono: ['', 
-      [Validators.pattern("^[67][0-9]{8}$"),
+    telefono: ["",[Validators.pattern("^[67][0-9]{8}$"),
       Validators.required]
   ],
   });
@@ -61,7 +59,6 @@ export class EditProfileComponent {
     });
     console.log(this.editPerfil.status)
   }
-  console.log(this.authService.getusuarrioSesion())
 
     
 
@@ -88,22 +85,24 @@ export class EditProfileComponent {
       this.actualizarNuevosDatosSinContrasena(this.nuevoUsuario);
       //validar que si no es null, se ha actualizado correctamente, si no,
       //no ha sufrido ningun cambio.
-      console.log(this.nuevoUsuario)
       this.authService.editarUserSinContrasena(this.nuevoUsuario).subscribe(res => {
-        this.Usuario = res;
+        // this.Usuario = res;
       });
+      console.log(this.nuevoUsuario)
 
     }else{
       //en caso de que SI se modifique la contraseña pasa por aqui.
       // this.nuevoUserConContrasena = this.getRellenarUserConPassword(this.nuevoUserConContrasena);
-      this.getRellenarUserConPassword(this.nuevoUserConContrasena);
-      console.log(this.nuevoUserConContrasena)
-      this.actualizarNuevosDatosConContrasena(this.nuevoUserConContrasena);
+      
+      // this.getRellenarUserConPassword(this.nuevoUserConContrasena);
+      this.nuevoUsuario = this.Usuario;
+      console.log(this.nuevoUsuario)
+      this.actualizarNuevosDatosConContrasena(this.nuevoUsuario);
       //validar que si no es null, se ha actualizado correctamente, si no,
       //no ha sufrido ningun cambio.
-      console.log(this.nuevoUserConContrasena)
-      this.authService.editarUserConContrasena(this.nuevoUserConContrasena).subscribe(res => {
-        this.Usuario = res;
+      console.log(this.nuevoUsuario)
+      this.authService.editarUserConContrasena(this.nuevoUsuario).subscribe(res => {
+        // this.Usuario.dataUser = res;
       });
 
 
@@ -142,11 +141,11 @@ export class EditProfileComponent {
     console.log(this.editPerfil.get("telefono")!.value!.toString())
   }
 
-  actualizarNuevosDatosConContrasena(usuarioRespuesta:UserI){
-    usuarioRespuesta.nombre = this.editPerfil.get("nombre")!.value!.toString();
-    usuarioRespuesta.apellidos = this.editPerfil.get("apellidos")!.value!.toString();
-    usuarioRespuesta.telefono = this.editPerfil.get("telefono")!.value!.toString();
-    usuarioRespuesta.password = this.editPerfil.get("password")!.value!.toString();
+  actualizarNuevosDatosConContrasena(usuarioRespuesta:UserRegistroI){
+    usuarioRespuesta.dataUser.nombre = this.editPerfil.get("nombre")!.value!.toString();
+    usuarioRespuesta.dataUser.apellidos = this.editPerfil.get("apellidos")!.value!.toString();
+    usuarioRespuesta.dataUser.telefono = this.editPerfil.get("telefono")!.value!.toString();
+    usuarioRespuesta.dataUser.password = this.editPerfil.get("password")!.value!.toString();
 
   }
 

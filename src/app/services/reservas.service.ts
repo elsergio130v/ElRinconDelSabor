@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,18 @@ export class ReservasService {
     return this.httpClient.get(url.toString());
   }
 
-  addReserva(){
-    
+  getHorasReservadas(fecha:{fecha:string}, comensales:{comensales:number[]}): Observable<number[]>{
+    return this.httpClient.post<number[]>('http://localhost:3000/rincondelsabor/getHorasReservadas', {fecha, comensales})
+    .pipe(tap(
+      (res:number[]) =>{
+        if(res){
+          console.log("correcto")
+        }else{
+          console.log("failed")
+          
+        }
+      })
+    );
   }
+
 }

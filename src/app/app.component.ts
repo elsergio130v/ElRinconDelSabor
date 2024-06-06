@@ -22,7 +22,6 @@ export class AppComponent {
   constructor(private router: Router) {}
   authservice = inject(AuthService);
 
-
   usuarioGlobal:UserRegistroI = this.getDefaultUser();
 
 
