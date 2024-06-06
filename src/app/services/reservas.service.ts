@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { ReservasHistoricas } from '../interfaces/ReservasHistoricas';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,20 @@ export class ReservasService {
     let url = new URL('http://localhost:3000/rincondelsabor/reservasFuturas');
     console.log(this.httpClient.get(url.toString()));
     return this.httpClient.get(url.toString());
+  }
+
+  getHistoricoReservas(email:{email:string}){
+    return this.httpClient.post<ReservasHistoricas[]>('http://localhost:3000/rincondelsabor/getHistoricoReservas', email)
+    .pipe(tap(
+      (res:ReservasHistoricas[]) =>{
+        if(res){
+          console.log("correcto")
+        }else{
+          console.log("failed")
+          
+        }
+      })
+    );
   }
 
   getHorasReservadas(fecha:{fecha:string}, comensales:{comensales:number[]}): Observable<number[]>{

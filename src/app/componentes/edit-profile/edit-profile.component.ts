@@ -37,9 +37,6 @@ export class EditProfileComponent {
 
   ngOnInit(){
     this.Usuario = this.appComponente.usuarioGlobal;
-    console.log("app "+this.appComponente.usuarioGlobal.dataUser.nombre)
-    console.log("auth "+this.authService.getusuarrioSesion().dataUser.nombre)
-    console.log("local "+this.Usuario.dataUser.nombre)
 
     if(this.authService.getToken()){
       console.log("2")
