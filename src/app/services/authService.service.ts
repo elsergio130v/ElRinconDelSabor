@@ -35,7 +35,6 @@ export class AuthService {
             // guardar token
             this.saveToken(res.dataUser.accessToken, res.dataUser.expiresIn);
             this.usuarioSesion = res;
-            window.location.href = "";
           }
         })
       );
@@ -58,7 +57,6 @@ export class AuthService {
             // guardar token
             this.saveToken(res.dataUser.accessToken, res.dataUser.expiresIn);
             this.usuarioSesion = res;
-            window.location.href = "";
             
           }
         })

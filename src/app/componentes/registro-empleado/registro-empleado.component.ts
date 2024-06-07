@@ -3,6 +3,7 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { RouterLinkWithHref } from '@angular/router';
 import { registroEmpleadoI } from '../../interfaces/RegistroEmpleadoI';
 import { AuthService } from '../../services/authService.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro-empleado',
@@ -14,6 +15,7 @@ import { AuthService } from '../../services/authService.service';
 export class RegistroEmpleadoComponent {
 
 mostrarNotificacion:boolean = false;
+alert:string = "hola";
 
 registro = this.formBuilder.group({
   nombre: ["", Validators.required],
@@ -47,10 +49,14 @@ onSubmit(){
     console.log(res)
     console.log(res.mensaje)
     if (res.mensaje === "true") { 
-      this.mostrarNotificacion = true; 
+      // this.mostrarNotificacion = true; 
+      Swal.fire({
+        title: "Registro Exitoso",
+        text: "Cierra la ventana pulsando en cerrar",
+        icon: "success"
+      })
       setTimeout(() => {
         window.location.href = ""; 
-        this.mostrarNotificacion = false;
       }, 3000);
     } else {
       

@@ -76,7 +76,6 @@ export class EditProfileComponent {
   onSubmit(){
 
     if(this.editPerfil.get('password')?.value === ""){
-      console.log("valiiiiiiiiiiii")
       //en caso de que NO se modifique la contraseña pasa por aqui.
       this.nuevoUsuario = this.Usuario;
       console.log(this.nuevoUsuario)
@@ -84,6 +83,7 @@ export class EditProfileComponent {
       //validar que si no es null, se ha actualizado correctamente, si no,
       //no ha sufrido ningun cambio.
       this.authService.editarUserSinContrasena(this.nuevoUsuario).subscribe(res => {
+
         // this.Usuario = res;
       });
       console.log(this.nuevoUsuario)

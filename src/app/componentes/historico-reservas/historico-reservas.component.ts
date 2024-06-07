@@ -4,11 +4,12 @@ import { ReservasHistoricas } from '../../interfaces/ReservasHistoricas';
 import { UserRegistroI } from '../../interfaces/UserRegistroI';
 import { AppComponent } from '../../app.component';
 import { AuthService } from '../../services/authService.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-historico-reservas',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './historico-reservas.component.html',
   styleUrl: './historico-reservas.component.css'
 })

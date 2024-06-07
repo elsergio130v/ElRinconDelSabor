@@ -1,6 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { Pizza } from '../../interfaces/pizza';
 import { ProductService } from '../../services/product.service';
+import { UserRegistroI } from '../../interfaces/UserRegistroI';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-carta',
@@ -14,12 +16,17 @@ export class CartaComponent {
 
   private product = inject(ProductService);
   public listadoPizzas = signal<Pizza[]>([]);
-  pizzas:any;
+  public app = inject(AppComponent);
+  public Usuario:UserRegistroI = this.app.usuarioGlobal;
+  public isPedido:boolean = false;
   
 
-
   ngOnInit() {
-    console.log("inicia");
+    if(this.Usuario.dataUser.rol === "EMPLEADO" ){
+      this.isPedido = true;
+
+    }
+
     
     this.product.getAllPizzas().subscribe({
       next: (data: any) => {
