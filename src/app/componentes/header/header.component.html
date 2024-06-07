@@ -11,15 +11,28 @@
         </button>
       </div>
     </div>
+
     <div id="navbar-collapse-with-animation" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
       <div class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
         <a class="font-medium text-white sm:py-6 
           hover:scale-125  active:scale-95 transition-all duration-100 checked:scale-125"
           href="#" aria-current="page">Inicio</a>
         <a routerLink="carta" routerLinkActive="underline" class="font-medium text-white/80 hover:text-white sm:py-6" href="#">Carta</a>
-        <a routerLink="reservas" routerLinkActive="underline"class="font-medium text-white/80 hover:text-white sm:py-6" href="#">Nueva Reserva</a>
-        <a routerLink="historicoReservas" routerLinkActive="underline"class="font-medium text-white/80 hover:text-white sm:py-6" href="#">Historico Reservas</a>
-        <a class="font-medium text-white/80 hover:text-white sm:py-6" href="#">Blog</a>
+        @if (item.dataUser.rol === "EMPLEADO") {
+            <a routerLink="pedido" routerLinkActive="underline"class="font-medium text-white/80 hover:text-white sm:py-6" href="#">Hacer Pedido</a>
+            <a routerLink="cerrarPedido" routerLinkActive="underline"class="font-medium text-white/80 hover:text-white sm:py-6" href="#">Cerrar Pedido</a>
+        }
+        @if (item.dataUser.rol === "GERENTE") {
+          <a routerLink="vistaAdmin" routerLinkActive="underline" class="font-medium text-white/80 hover:text-white sm:py-6" href="#">Vista Admin</a>
+        }
+        @if (item.dataUser.rol === "CLIENTE") {
+
+
+          <a routerLink="reservas" routerLinkActive="underline"class="font-medium text-white/80 hover:text-white sm:py-6" href="#">Nueva Reserva</a>
+          <a routerLink="historicoReservas" routerLinkActive="underline"class="font-medium text-white/80 hover:text-white sm:py-6" href="#">Historico Reservas</a>
+        }
+
+        <!-- <a class="font-medium text-white/80 hover:text-white sm:py-6" href="#">Blog</a> -->
 
 
         @if (item.dataUser.nombre === "Log In") {
@@ -74,12 +87,12 @@
                 </div>
               </div>  -->
   
-              <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-white hover:bg-gray-100 hover:text-green-700 transition-all duration-100 focus:ring-2 
+              <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-white hover:bg-gray-100 hover:text-green-500 transition-all duration-100 focus:ring-2 
               focus:ring-blue-500 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 cursor-pointer" 
               (click)="logOut()">
                 Cerrar Sesión
               </a>
-              <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-white hover:bg-gray-100 hover:text-green-700 transition-all duration-100 focus:ring-2 
+              <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-white hover:bg-gray-100 hover:text-green-500 transition-all duration-100 focus:ring-2 
               focus:ring-blue-500 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300" href="#">
                 Team Account
               </a>

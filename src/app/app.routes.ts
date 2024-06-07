@@ -6,6 +6,8 @@ import { LandinPageComponent } from './componentes/landin-page/landin-page.compo
 import { EditProfileComponent } from './componentes/edit-profile/edit-profile.component';
 import { VistaAdminComponent } from './componentes/vista-admin/vista-admin.component';
 import { HistoricoReservasComponent } from './componentes/historico-reservas/historico-reservas.component';
+import { RegistroEmpleadoComponent } from './componentes/registro-empleado/registro-empleado.component';
+import { PedidosComponent } from './componentes/pedidos/pedidos.component';
 
 
 export const routes: Routes = [
@@ -18,7 +20,10 @@ export const routes: Routes = [
     { path: "editprofile", component: EditProfileComponent, },
     { path: 'inicioSesion', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
     { path: "vistaAdmin", component: VistaAdminComponent },
-    { path: "historicoReservas", component: HistoricoReservasComponent }
+    { path: "historicoReservas", component: HistoricoReservasComponent },
+    { path: "registroEmpleado", component: RegistroEmpleadoComponent },
+    { path: "pedido", component: PedidosComponent }
+
 
 
 

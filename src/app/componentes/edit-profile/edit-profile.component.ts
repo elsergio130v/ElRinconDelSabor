@@ -4,11 +4,12 @@ import { UserRegistroI } from '../../interfaces/UserRegistroI';
 import { AuthService } from '../../services/authService.service';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { UserI } from '../../interfaces/userI';
+import { RouterLinkWithHref } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLinkWithHref],
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.css'
 })

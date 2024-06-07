@@ -7,6 +7,7 @@ import { UserRegistroI } from '../interfaces/UserRegistroI';
 import { Router } from '@angular/router';
 import { Expansion } from '@angular/compiler';
 import { UserI } from '../interfaces/userI';
+import { registroEmpleadoI } from '../interfaces/RegistroEmpleadoI';
 
 
 @Injectable({
@@ -39,6 +40,14 @@ export class AuthService {
         })
       );
     }
+
+    registroEmpleado(user: registroEmpleadoI): Observable<any> {
+      return this.httpClient.post<any>(`${this.AUTH_SERVER}/registroEmpleado`,
+        user).pipe(tap(
+          (res: any) => {
+          })
+        );
+      }
     
     login(user: UserRegistroI): Observable<UserRegistroI> {
       return this.httpClient.post<UserRegistroI>(`${this.AUTH_SERVER}/login`,
@@ -71,7 +80,7 @@ export class AuthService {
 
 
 
-          // window.location.href = "";
+          window.location.href = "";
           
         }
       })
@@ -90,7 +99,7 @@ editarUserConContrasena(user: UserRegistroI): Observable<UserRegistroI> {
         this.usuarioSesion.dataUser.apellidos = res.user.apellidos;
         this.usuarioSesion.dataUser.telefono = res.user.telefono;
         // this.usuarioSesion = res;
-        // window.location.href = "";
+        window.location.href = "";
         
       }
     })
@@ -99,7 +108,7 @@ editarUserConContrasena(user: UserRegistroI): Observable<UserRegistroI> {
 
 
 
-
+//pasamos el usuario con el token y nos devuelve el usuario por completo.
   getUsuarioToken(usuario:UserRegistroI): Observable<UserRegistroI> {
     return this.httpClient.post<UserRegistroI>(`${this.AUTH_SERVER}/getUserToken`,
     usuario).pipe(tap(

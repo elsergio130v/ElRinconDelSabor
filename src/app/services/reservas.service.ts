@@ -22,6 +22,12 @@ export class ReservasService {
     return this.httpClient.get(url.toString());
   }
 
+  getReservasActules(){
+    let url = new URL('http://localhost:3000/rincondelsabor/getReservasActules');
+    console.log(this.httpClient.get(url.toString()));
+    return this.httpClient.get(url.toString());
+  }
+
   getHistoricoReservas(email:{email:string}){
     return this.httpClient.post<ReservasHistoricas[]>('http://localhost:3000/rincondelsabor/getHistoricoReservas', email)
     .pipe(tap(

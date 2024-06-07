@@ -10,11 +10,12 @@ import { CartaComponent } from './componentes/carta/carta.component';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/authService.service';
 import { HeaderComponent } from './componentes/header/header.component';
+import { FormatearFechaPipe } from './pipes/formatear-fecha.pipe';
 
 
 @NgModule({
   declarations: [
-
+    FormatearFechaPipe
   ],
   imports: [
     BrowserModule,
